@@ -1,8 +1,14 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "module": "commonjs",
     "target": "esnext",
-    "watch": true
+    "module": "commonjs",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "watch": true,
   },
   "include": [
     "simple-blockchain"

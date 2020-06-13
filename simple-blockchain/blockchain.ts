@@ -4,7 +4,6 @@ interface Transaction {
   sender: string,
   recipient: string,
   amount: number,
-  signature: number,
   date: number
 }
 
@@ -12,28 +11,32 @@ class Block {
   id: number;
   transactions: Array<Transaction>;
   hash: string;
-  proofOfWork: number;
   previousHash: string;
+  proofOfWork: number;
 
-  constructor(id: number, transactions: Array<Transaction>, proofOfWork: number, previousHash?: string) {
+  constructor(id: number, transactions: Array<Transaction>, proofOfWork?: number) {
     this.id = id;
     this.transactions = transactions;
     this.hash = this.computeHash();
-    this.proofOfWork = proofOfWork;
-    (previousHash ? (this.previousHash = previousHash) : (this.previousHash = ""));
+    this.previousHash = "";
+    (proofOfWork ? this.proofOfWork = proofOfWork : this.proofOfWork = 0);
   }
 
-  computeHash() {
+  computeHash(): string {
     return SHA256(JSON.stringify(this)).toString();
   }
 
-  generateProofOfWork(difficulty: number) {
+  generateProofOfWork(difficulty: number): number {
     let proofOfWork = 0;
-    while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
-      this.proofOfWork = Math.floor(Math.random() * (2 ** 63 - 1));
+    while (!this.verifyProofOfWork(difficulty)) {
+      this.proofOfWork = Math.floor(Math.random() * (2 ** 48 - 1));
       this.hash = this.computeHash();
     }
     return proofOfWork;
+  }
+
+  verifyProofOfWork(difficulty: number): Boolean {
+    return (this.hash.substring(0, difficulty) === Array(difficulty + 1).join("0"));
   }
 }
 
@@ -44,36 +47,27 @@ class Blockchain {
   constructor(difficulty: number) {
     this.blockchain = [];
     this.difficulty = difficulty;
-    this.createNewBlock([{ sender: "", recipient: "", amount: 0, signature: 0, date: Date.now() }], 0).generateProofOfWork(this.difficulty);
+    this.createNewBlock([{ sender: "", recipient: "", amount: 0, date: Date.now() }]).generateProofOfWork(this.difficulty);
   }
 
-  getLastBlock() {
-    return this.blockchain[this.blockchain.length - 1];
+  getLastBlock(): Block {
+    return (this.blockchain.length ? this.blockchain[this.blockchain.length - 1] : null);
   }
 
-  createNewBlock(transactions: Array<Transaction>, proofOfWork: number) {
-    let block = new Block(
-      this.blockchain.length,
-      transactions,
-      proofOfWork
-    );
-    block.previousHash = this.getLastBlock().hash;
+  createNewBlock(transactions: Array<Transaction>, proofOfWork?: number): Block {
+    let block = new Block(this.blockchain.length, transactions, proofOfWork);
+    (this.getLastBlock() ? block.previousHash = this.getLastBlock().hash : block.previousHash = "");
     this.blockchain.push(block);
     return block;
-  }
-
-  verifyValidProofOfWork() {
-  }
-
-  verifyBlockchain() {
-    for (let i = 1; i < this.blockchain.length; i++) {
-      const currentBlock = this.blockchain[i];
-      const previousBlock = this.blockchain[i - 1];
-    }
   }
 }
 
 let cryptoChain = new Blockchain(3);
-let block = cryptoChain.createNewBlock([{ sender: "andrei", recipient: "world", amount: 10, signature: 1010102, date: Date.now() }], 0);
-block.generateProofOfWork(cryptoChain.difficulty);
-console.log(JSON.stringify(cryptoChain));
+cryptoChain.createNewBlock([{ sender: "andrei", recipient: "world", amount: 10, date: Date.now() }], 0).generateProofOfWork(3);
+cryptoChain.createNewBlock([{ sender: "world", recipient: "world", amount: 100, date: Date.now() }], 0).generateProofOfWork(3);
+cryptoChain.createNewBlock([{ sender: "world", recipient: "andrei", amount: 10, date: Date.now() }], 0).generateProofOfWork(3);
+let block = cryptoChain.createNewBlock([{ sender: "world", recipient: "andrei", amount: 10, date: Date.now() }], 0);
+console.log(block.verifyProofOfWork(3));
+block.generateProofOfWork(3);
+console.log(JSON.stringify(cryptoChain, null, 4));
+console.log(block.verifyProofOfWork(3));
