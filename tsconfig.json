@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "watch": true
+  },
+  "include": [
+    "simple-blockchain"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
