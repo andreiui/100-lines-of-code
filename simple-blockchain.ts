@@ -1,3 +1,5 @@
+export { Blockchain };
+
 const SHA256 = require('crypto-js/sha256');
 
 interface Transaction {
