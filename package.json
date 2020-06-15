@@ -12,11 +12,15 @@
   "devDependencies": {},
   "scripts": {
     "blockchain-tsc": "tsc simple-blockchain.ts",
-    "blockchain-node": "node simple-blockchain.js"
+    "blockchain-node": "node simple-blockchain.js",
+    "hashtable-tsc": "tsc simple-hashtable.ts",
+    "hashtable-node": "node simple-hashtable.js"
   },
   "keywords": [
     "simple",
-    "programs"
+    "programs",
+    "blockchain",
+    "hashtable"
   ],
   "author": "Andrei Pascu",
   "license": "MIT"
