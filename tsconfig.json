@@ -11,7 +11,7 @@
     "watch": true,
   },
   "include": [
-    "simple-blockchain"
+    "simple-blockchain.ts"
   ],
   "exclude": [
     "node_modules"
