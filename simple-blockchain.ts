@@ -1,14 +1,12 @@
-export { Blockchain };
+export { Blockchain, Block, Transaction };
 
 const SHA256 = require('crypto-js/sha256');
-
 interface Transaction {
   sender: string;
   recipient: string;
   amount: number;
   date: number;
 }
-
 class Block {
   index: number;
   transactions: Array<Transaction>;
@@ -30,10 +28,9 @@ class Block {
     return SHA256(this.index + JSON.stringify(this.transactions) + this.timestamp + this.previousHash + this.proofOfWork).toString();
   }
 }
-
 class Blockchain {
-  blockchain: Array<Block>;
-  difficulty: number;
+  private blockchain: Array<Block>;
+  private difficulty: number;
 
   constructor(difficulty: number) {
     this.blockchain = [];
@@ -83,7 +80,7 @@ class Blockchain {
   mine(user: string, block: Block = this.getLastBlock()): void {
     let prize: Transaction = { sender: "blockchain", recipient: user, amount: 1, date: Date.now() };
     this.addTransaction(prize, block);
-    console.log(`mining in progress for block (index:${block.index})`);
+    console.log(`mining started for block (index:${block.index})`);
     this.generateProofOfWork(block);
     console.log(`new block (hash:${block.hash}) was mined`);
   }
