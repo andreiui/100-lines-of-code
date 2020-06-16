@@ -34,8 +34,4 @@ _References: ["But how does bitcoin actually work?" ––3blue1brown](https://w
 
 A simple hashtable in 83 lines.
 
-Requires crypto-js library. To install dependency, run:
-
-    npm install crypto-js
-
 _References: ["Notes on Data Structures and Programming Techniques, 5.4 Hash tables" (CPSC 223, Spring 2018) ––James Aspnes](https://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#hashTables)_
