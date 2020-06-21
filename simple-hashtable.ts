@@ -1,4 +1,4 @@
-export { Hashtable, _DEFAULT_INIT_SIZE, _DEFAULT_LOAD_FACTOR };
+export { Hashtable, Pair, _DEFAULT_INIT_SIZE, _DEFAULT_LOAD_FACTOR };
 
 const _DEFAULT_INIT_SIZE = 64;
 const _DEFAULT_LOAD_FACTOR = 8;
