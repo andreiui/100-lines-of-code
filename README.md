@@ -48,7 +48,7 @@ _References: ["But how does bitcoin actually work?"––3blue1brown](https://ww
 
 A simple compiler in 64 lines.
 
-To use library, import function `compileIntoMath` from `simple-compiler`.
+To use library, import function `compile` from `simple-compiler`.
 
 Takes only one argument: a line of code, i.e. a `string`, written in __simple-math syntax__ (very short documentation
 available below), and converts it to calculator-executable math.
