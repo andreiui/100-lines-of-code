@@ -1,4 +1,4 @@
-export { Blockchain, Block, Transaction };
+export { Blockchain, Transaction };
 
 const SHA256 = require('crypto-js/sha256');
 
