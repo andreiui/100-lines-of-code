@@ -13,14 +13,19 @@
   "scripts": {
     "blockchain-tsc": "tsc simple-blockchain.ts",
     "blockchain-node": "node simple-blockchain.js",
+    "compiler-tsc": "tsc simple-compiler.ts",
+    "compiler-node": "node simple-compiler.js",
     "hashtable-tsc": "tsc simple-hashtable.ts",
-    "hashtable-node": "node simple-hashtable.js"
+    "hashtable-node": "node simple-hashtable.js",
+    "rsa-tsc": "tsc simple-rsa.ts",
+    "rsa-node": "node simple-rsa.js"
   },
   "keywords": [
     "simple",
     "programs",
     "blockchain",
-    "hashtable"
+    "hashtable",
+    "rsa"
   ],
   "author": "Andrei Pascu",
   "license": "MIT"
