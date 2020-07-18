@@ -16,19 +16,16 @@ abstract class RSAMath {
   static simplePrimalityTest(n: bigint): boolean {
     let i = 2n
     for (; i * i <= n; i++) {
-      if (n % i == 0n)
-        return false
+      if (n % i == 0n) return false
     }
     return true
   }
 
   static modularExponentiation(a: bigint, b: bigint, m: bigint): bigint {    // a^b mod m
     let result = 1n
-    if (a === 0n)
-      return 0n
+    if (a === 0n) return 0n
     while (b > 0) {
-      if (b & 1n)
-        result = (result * a) % m
+      if (b & 1n) result = (result * a) % m
       b = b >> 1n;
       a = (a * a) % m;
     }
@@ -37,8 +34,7 @@ abstract class RSAMath {
 
   static modularInverse(e: bigint, m: bigint): bigint {    // ed = 1 (mod m) with gcd(e, m) = 1
     let xgcd = this.extendedEuclidianAlgorithm(e, m)
-    if (xgcd[2] !== 1n)
-      return -1n
+    if (xgcd[2] !== 1n) return -1n
     return (xgcd[0] + m) % m    // ey + mx = 1 (Bezout's identity for gcd(e, m) = 1) with xgdc[0] = y
   }
 
@@ -57,8 +53,7 @@ class RSA {
 
   constructor(e: bigint = 1n, p1: bigint = 0n, p2: bigint = 0n) {
     if (p1 * p2 === 0n) {
-      while (p1 === p2)
-        p1 = RSAMath.generatePrime(), p2 = RSAMath.generatePrime()
+      while (p1 === p2) p1 = RSAMath.generatePrime(), p2 = RSAMath.generatePrime()
     }
     let phi = (p1 - 1n) * (p2 - 1n)
     if (e === 1n || RSAMath.extendedEuclidianAlgorithm(e, phi)[2] !== 1n) e = RSAMath.generateEncryptionKey(phi)
