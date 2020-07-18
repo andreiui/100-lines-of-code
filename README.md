@@ -26,8 +26,7 @@ And then run:
 
 A simple blockchain in 90 lines.
 
-To use library, import `simple-blockchain` and create a new `Blockchain` object with a difficulty integer as its
-constructor argument.
+To use library, import `simple-blockchain` and create a new `Blockchain` object with a difficulty integer as its constructor argument.
 
 - To add new blocks to the Blockchain, call the class method `createNewBlock` with an array of Transactions and an optional proof of work as its arguments
 - To add transactions to an existing block, call the class method `addTransaction` with a Transaction and an optional Block; if no Block is passed, the method will add the transaction to the last block in the chain
@@ -88,4 +87,33 @@ To use library, import `simple-hashtable` and create a new `Hashtable` object.
 Class methods `insert`, `search`, and `delete` allow for insertion, searching, and deletion of elements of type `Pair` inside
 hash table.
 
-_References: ["Notes on Data Structures and Programming Techniques, 5.4 Hash tables" (CPSC 223, Spring 2018)––James Aspnes](https://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#hashTables)_
+_References: ["Notes on Data Structures and Programming Techniques, 5.4 Hash tables" (CPSC 223, Spring 2020)––James Aspnes](https://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#hashTables)_
+
+---
+
+### simple-rsa
+
+A simple RSA encryption program in 92 lines.
+
+To use library, import `simple-rsa` and create a new `RSA` object. When creating a new `RSA(e: bigint?, p1: bigint?, p2: bigint?)`, it will generate a new public encryption key and new private prime factors, if none are provided in its constructor.
+
+The RSA implementation is comprised of the following: a public modulo `n`, a public encryption key `e`, a private decryption key `d`, and an inbox containing any encripted messages.
+
+- To add a message to the inbox to be encrypted, call the class method `addToInbox` that takes one argument: a message of type `BigInt`
+- To view the inbox and its encrypted content, call the class method `viewInbox`
+- To decrypt the entire inbox, call the class method `decryptInbox` (the method will also empty the inbox)
+
+Note: This specific implementation of the RSA algorithm uses `BigInt` (see [Documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt)). This is done in an attempt to avoid adding unnecesarry complexity to the contents of the program and allow for the generating larger prime numbers with ease. However, for real cryptographic applications, it is recommended to avoid using `BigInt` due to operations not being constant-time (see `BigInt` documentation under "Usage recommendations > Cryptography" and ["A beginner's guide to constant-time cryptography"](https://www.chosenplaintext.ca/articles/beginners-guide-constant-time-cryptography.html))
+
+The library also includes an abstract class `RSAMath`, which provides the mathematical functions necessary for the implementation of the RSA algorithm.
+
+- The static method `generateEncryptionKey` takes an argument: `phi`, and generates a small encryption key that does not share any prime factors with `phi`
+- The static method `generatePrime` takes two optional arguments: `bitSize` and `bitRange`, and generates a random prime number of `bitSize ± bitRange` bits. By default `bitSize = 42` and `bitRange = 4`
+- The static method `simplePrimalityTest` takes an argument: `n`, and returns whether `n` is prime or not
+- The static method `modularExponentiation` takes three arguments: `a`, `b`, and `m`, and returns the result of the calculation `a^b mod m`
+- The static method `modularInverse` takes two arguments: `e` and `m`, and returns the inverse of `e`, i.e. `d` such that `ed = de = 1 (mod m)`, or `-1n` if such a number does not exist
+- The static method `extendedEuclidianAlgorithm` takes two arguments: `a` and `b`, and returns the solution to the equation `ay + bx = gcd(a, b)` in an array of three elements: `[y, x, gcd(a, b)]`
+
+_References: ["Notes on Discrete Mathematics, 8.7. RSA encryption (CPSC 202, Spring 2020)––James Aspnes"](https://www.cs.yale.edu/homes/aspnes/classes/202/notes.pdf)_
+
+_Additional resources: ["Modular multiplicative inverse"](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse), ["Bézout's identity and extended GCD algorithm"](https://en.wikipedia.org/wiki/Polynomial_greatest_common_divisor#B.C3.A9zout.27s_identity_and_extended_GCD_algorithm), ["Euler's theorem"](https://en.wikipedia.org/wiki/Euler%27s_theorem)_
