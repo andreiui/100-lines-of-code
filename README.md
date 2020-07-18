@@ -93,7 +93,7 @@ _References: ["Notes on Data Structures and Programming Techniques, 5.4 Hash tab
 
 ### simple-rsa
 
-A simple RSA encryption program in 92 lines.
+A simple RSA encryption program in 87 lines.
 
 To use library, import `simple-rsa` and create a new `RSA` object. When creating a new `RSA(e: bigint?, p1: bigint?, p2: bigint?)`, it will generate a new public encryption key and new private prime factors, if none are provided in its constructor.
 
