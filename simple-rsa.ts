@@ -29,7 +29,7 @@ abstract class RSAMath {
       b = b >> 1n;
       a = (a * a) % m;
     }
-    return result;
+    return result
   }
 
   static modularInverse(e: bigint, m: bigint): bigint {    // ed = 1 (mod m) with gcd(e, m) = 1
