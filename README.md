@@ -1,8 +1,8 @@
-# Simple Programs
+# Pedagogic TS
 
 > Simplicity is prerequisite for reliability––Edsger W. Dijkstra
 
-A collection of short coding projects, inspired from fun programming challenges.
+A collection of short pedagogic programs introducing data structures and computational math puzzles. Implement hash tables, RSA encryption, compiler functions and blockchain technology.
 
 ## Getting Started
 
@@ -14,11 +14,11 @@ Programs are written in TypeScript. For the latest version, run:
 
 To run any simple-program, first compile into JavaScript using
 
-    tsc [name_of_simple_program].ts
+    tsc [simple-*].ts
 
 And then run:
 
-    node [name_of_simple_program].js
+    node [simple-*].js
 
 ---
 
@@ -73,8 +73,6 @@ Examples:
 - "(sum 1 2 3)" => "(1+2+3)"
 - "(dot 0.5 (div 7 1.4))" => "(0.5*(7/1.4))"
 - "(exp 2 (mod (dot 3 -6) 4))" => "(2**((3*(-6))%4))"
-
-_References:_
 
 ---
 
