@@ -1,4 +1,4 @@
-# Pedagogic TS
+# 100 Lines of Code
 
 > Simplicity is prerequisite for reliability––Edsger W. Dijkstra
 
