@@ -5,7 +5,7 @@
   "main": "",
   "dependencies": {
     "@types/node": "^14.0.13",
-    "crypto-js": "^4.0.0",
+    "crypto-js": "^4.2.0",
     "node": "^14.4.0",
     "typescript": "^3.9.5"
   },
